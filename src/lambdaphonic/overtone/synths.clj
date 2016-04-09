@@ -146,3 +146,19 @@
         env (env-gen (perc 0.001 0.3) :action FREE)]
     (* 0.7 src env)))
 
+(defsynth blips [base 96 spread 10 room-size 200 amp 1 out-bus 0]
+  (let [d (duty:kr [1/40] 0 (dseq:dr (+ (mod base 101) (* spread (white-noise:kr))) INF))
+        sigs (blip:ar (* (midicps d) [1 2 4]) 4)
+        sig  (sum sigs)
+        fx   (g-verb:ar sig room-size 8)]
+    (out:ar out-bus (* fx 0.01 amp))))
+
+(definst e3
+  [note 60 cutoff 700]
+  (let [freq (midicps note)
+        env (env-gen (perc 0.1 0.7) :action FREE)
+        sig (sin-osc freq)
+        sig (+ sig (sin-osc (+ freq 5)))
+        sig (+ sig (sin-osc (- freq 5)))
+        flt (bpf sig cutoff)]
+    (* env flt)))
