@@ -3,5 +3,5 @@
   :url "http://github.com/lambdaphonic/overtone.synths"
   :license {:name "Eclipse Public License"
             :url "http://www.eclipse.org/legal/epl-v10.html"}
-  :dependencies [[org.clojure/clojure "1.6.0"]
-                 [overtone "0.9.1"]])
+  :dependencies [[org.clojure/clojure "1.8.0"]
+                 [overtone "0.10.1"]])
